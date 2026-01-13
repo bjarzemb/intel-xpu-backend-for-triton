@@ -71,7 +71,7 @@ def find_sycl(include_dir: list[str]) -> tuple[list[str], list[str]]:
         # being add: include and include/sycl.
         if "sycl.hpp" in f.name:
             include_dir += [str(f.locate().parent.parent.resolve())]
-        if any(map(lambda el: el in f.name, ("libsycl.so", "sycl8.dll", "sycl8.lib"))):
+        if any(map(lambda el: el in f.name, ("libsycl.so", "sycl9.dll", "sycl9.lib"))):
             sycl_dir = str(f.locate().parent.resolve())
             # should we handle `_` somehow?
             if os.name == "nt":
@@ -95,7 +95,7 @@ class CompilationHelper:
         if os.name != "nt":
             self.libraries += ["sycl"]
         else:
-            self.libraries += ['sycl8']
+            self.libraries += ['sycl9']
 
     @property
     def inject_pytorch_dep(self):
